@@ -3,16 +3,6 @@ var spawnSync = require('child_process').spawnSync,
   fs = require('fs'),
   path = require('path'),
   moment = require('moment');
-/*
-var getMp3Length = spawnSync('cscript', ['/nologo', 'mp3length.vbs']),
-  dur = moment.duration(getMp3Length.stdout.toString());
-console.log(dur.asSeconds());
-console.log('Is a duration? ' + moment.isDuration(dur));
-console.log(path.parse('d:/work/mp3length/tests/test.mp3'));
-
-      for mac use afinfo
-      http://osxdaily.com/2010/10/19/get-mp3-file-info-on-mac/
-*/
 
 module.exports = function mp3Length(mp3file, callback) {
   // make sure the file exists
@@ -28,13 +18,24 @@ module.exports = function mp3Length(mp3file, callback) {
     }
     else {
       var mp3Path = path.parse(mp3file);
-      console.log(mp3Path);
-      console.log('mp3Path.dir: ' + mp3Path.dir);
-      console.log('mp3Path.base: ' + mp3Path.base);
-      var getMp3Length = spawnSync('cscript', ['/nologo', 'lib/mp3length.vbs', mp3Path.dir, mp3Path.base]),
-        result = getMp3Length.stdout.toString(),
-        mp3Duration = moment.duration(result);
-      callback(null, mp3Duration.asSeconds());
+      if (process.platform === 'win32') {
+        var getMp3Length = spawnSync('cscript', ['/nologo', 'lib/mp3length.vbs', mp3Path.dir, mp3Path.base]),
+          result = getMp3Length.stdout.toString(),
+          mp3Duration = moment.duration(result);
+        callback(null, mp3Duration.asSeconds());
+      } else if (process.platform === 'darwin') {
+        var shellCommand = 'afinfo ' + mp3Path.dir + '/' + mp3Path.base + ' |grep \'estimated duration:\'',
+          getMp3Length = spawnSync('afinfo', [mp3Path.dir + '/' + mp3Path.base]);
+        var results = getMp3Length.stdout.toString().split('\n'),
+          result = null;
+        for (var i = 0; i < results.length; i++) {
+          if (results[i].includes('estimated')) {
+            result = results[i].replace('estimated duration', '').replace(' sec', '').replace(':', '').trim();
+          }
+        }
+        getMp3Length = Math.round(parseFloat(result));
+        callback(null, getMp3Length);
+      }
     }
   });
 

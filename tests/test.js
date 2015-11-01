@@ -11,7 +11,7 @@ describe('mp3Length()', function () {
       done();
     });
   });
-  
+
   it('should return a correct length for mp3 file with a non-English file name', function (done) {
     mp3Length('./tests/測試.mp3', function (err, length) {
       assert.equal(err, null);
@@ -26,12 +26,12 @@ describe('mp3Length()', function () {
       done();
     });
   });
-  
+
   it('should return an error when the mp3 file is not a file', function (done) {
     mp3Length('./tests/testFolder', function (err, length) {
       assert.notEqual(err, null);
       done();
     });
   });
-  
+
 });
