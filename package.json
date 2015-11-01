@@ -1,0 +1,29 @@
+{
+  "name": "mp3length",
+  "version": "1.0.0",
+  "description": "Get the length of mp3 files utilizing OS built in functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuchuan1/mp3length.git"
+  },
+  "keywords": [
+    "nodejs",
+    "mp3"
+  ],
+  "author": "yuchuan1@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yuchuan1/mp3length/issues"
+  },
+  "homepage": "https://github.com/yuchuan1/mp3length#readme",
+  "dependencies": {
+    "moment": "^2.10.6"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.3"
+  }
+}
