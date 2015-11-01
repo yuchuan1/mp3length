@@ -23,9 +23,7 @@ module.exports = function mp3Length(mp3file, callback) {
           result = getMp3Length.stdout.toString(),
           mp3Duration = moment.duration(result);
         callback(null, mp3Duration.asSeconds());
-      } else if (process.platform === 'darwin') {
-        var shellCommand = 'afinfo ' + mp3Path.dir + '/' + mp3Path.base + ' |grep \'estimated duration:\'',
-          getMp3Length = spawnSync('afinfo', [mp3Path.dir + '/' + mp3Path.base]);
+      } else if (process.platform === 'darwin') {       
         var results = getMp3Length.stdout.toString().split('\n'),
           result = null;
         for (var i = 0; i < results.length; i++) {
