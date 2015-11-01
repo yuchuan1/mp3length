@@ -1,6 +1,6 @@
 {
   "name": "mp3length",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Get the length of mp3 files utilizing OS built in functions",
   "main": "index.js",
   "scripts": {
