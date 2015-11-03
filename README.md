@@ -1,5 +1,6 @@
 # mp3length
 
+[![Dependency status](http://img.shields.io/david/yuchuan1/mp3length.svg?style=flat-square)](https://david-dm.org/yuchuan1/mp3length)
 [![Join the chat at https://gitter.im/yuchuan1/mp3length](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/yuchuan1/mp3length?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Get the length of mp3 files utilizing OS built in functions for windows and OSX
